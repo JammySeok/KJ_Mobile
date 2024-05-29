@@ -3,6 +3,7 @@ package com.example.kj_project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     EditText[] edtEng, edtKor;
-    Button btnSave, hideEng, hideKor;
+    Button btnSave, hideEng, hideKor, btnShow;
     DatePicker dPicker;
     String[] fileNames, tempEn, tempKr;
     int enON, krON;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         hideEng = findViewById(R.id.hideEng);
         hideKor = findViewById(R.id.hideKor);
+        btnShow = findViewById(R.id.btnShow);
         dPicker = findViewById(R.id.dPicker);
 
         fileNames = new String[10];
@@ -82,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                     edtKor[i].setText(str2);
                 }
                 btnSave.setEnabled(true);
+                hideEng.setText("단어 숨기기");
+                hideKor.setText("뜻 숨기기");
             }
         });
 
@@ -152,6 +156,14 @@ public class MainActivity extends AppCompatActivity {
                     krON = 1;
                     if(enON == 1) btnSave.setEnabled(true);
                 }
+            }
+        });
+
+        btnShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ShowActicity.class);
+                startActivity(intent);
             }
         });
     }
