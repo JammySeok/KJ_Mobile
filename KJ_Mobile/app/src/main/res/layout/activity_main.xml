@@ -198,8 +198,14 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/btnGame"
+                android:text="단어 게임" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/btnShow"
-                android:text="이번달 단어 리스트" />
+                android:text="이번 달 단어 리스트" />
 
         </LinearLayout>
 

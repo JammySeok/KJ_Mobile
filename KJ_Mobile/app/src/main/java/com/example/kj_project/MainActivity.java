@@ -18,9 +18,9 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText[] edtEng, edtKor;
-    Button btnSave, hideEng, hideKor, btnShow;
     DatePicker dPicker;
+    Button btnSave, hideEng, hideKor, btnGame, btnShow;
+    EditText[] edtEng, edtKor;
     String[] fileNames, tempEn, tempKr;
     int enON, krON;
 
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         hideEng = findViewById(R.id.hideEng);
         hideKor = findViewById(R.id.hideKor);
+        btnGame = findViewById(R.id.btnGame);
         btnShow = findViewById(R.id.btnShow);
         dPicker = findViewById(R.id.dPicker);
 
@@ -68,9 +69,18 @@ public class MainActivity extends AppCompatActivity {
             String str2 = readWord(fileNames[i * 2 + 1]);
             edtEng[i].setText(str1);
             edtKor[i].setText(str2);
+
+            if(str1 == null || str2 == null) {
+                btnGame.setEnabled(false);
+                continue;
+            }
+            if(str1.equals("") || str2.equals("")) {
+                btnGame.setEnabled(false);
+                continue;
+            }
+
         }
         btnSave.setEnabled(true);
-
 
         dPicker.init(cYear, cMonth, cDay, new DatePicker.OnDateChangedListener() {
             @Override
@@ -92,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int temp = 0;
                 for (int i = 0; i < 5; i++) {
                     try {
                         FileOutputStream outFs1 = openFileOutput(fileNames[i * 2], Context.MODE_PRIVATE);
@@ -102,6 +113,19 @@ public class MainActivity extends AppCompatActivity {
                         outFs2.write(str2.getBytes());
                         outFs1.close();
                         outFs2.close();
+
+                        if(temp == 1) continue;
+                        else btnGame.setEnabled(true);
+
+                        if(str1 == null || str2 == null) {
+                            btnGame.setEnabled(false);
+                            temp = 1;
+                        }
+                        if(str1.equals("") || str2.equals("")) {
+                            btnGame.setEnabled(false);
+                            temp = 1;
+                        }
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -159,6 +183,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
             wordStr = (new String(txt)).trim();
             btnSave.setText("수정하기");
         } catch (IOException e) {
-            btnSave.setText("단어 저장");
+            btnSave.setText("단어저장");
         }
 
         return wordStr;

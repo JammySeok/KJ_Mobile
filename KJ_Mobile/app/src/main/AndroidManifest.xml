@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShowActicity" android:label="Show 액티비티" />
+        <activity android:name=".GameActivity" android:label="Game 액티비티" />
     </application>
 
 </manifest>

@@ -15,15 +15,12 @@ import java.util.Calendar;
 public class ShowActicity extends Activity {
     LinearLayout[] lnrLayout;
     TextView[] textEng, textKor;
-
     String[] fileNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show);
-
-        LinearLayout parentLayout = findViewById(R.id.addWord);
 
         lnrLayout = new LinearLayout[5];
         textEng = new TextView[5];
@@ -45,6 +42,8 @@ public class ShowActicity extends Activity {
                 if(str1 == null || str2 == null) continue;
                 if(str1.equals("") || str2.equals("")) continue;
 
+                LinearLayout parentLayout = findViewById(R.id.addWord);
+
                 lnrLayout[j] = new LinearLayout(this);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -55,26 +54,26 @@ public class ShowActicity extends Activity {
                 parentLayout.addView(lnrLayout[j]);
 
                 textEng[j] = new TextView(this);
-                LinearLayout.LayoutParams textLayoutParams1 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams textViewParams1 = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
                 );
 
-                textLayoutParams1.weight = 1;
-                textEng[j].setLayoutParams(textLayoutParams1);
+                textKor[j] = new TextView(this);
+                LinearLayout.LayoutParams textViewParams2 = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+
+                textViewParams1.weight = 1;
+                textEng[j].setLayoutParams(textViewParams1);
                 textEng[j].setGravity(Gravity.CENTER);
                 textEng[j].setTextSize(20);
                 textEng[j].setText(str1);
                 lnrLayout[j].addView(textEng[j]);
 
-                textKor[j] = new TextView(this);
-                LinearLayout.LayoutParams textLayoutParams2 = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                );
-
-                textLayoutParams2.weight = 1;
-                textKor[j].setLayoutParams(textLayoutParams2);
+                textViewParams2.weight = 1;
+                textKor[j].setLayoutParams(textViewParams2);
                 textKor[j].setGravity(Gravity.CENTER);
                 textKor[j].setTextSize(20);
                 textKor[j].setText(str2);
