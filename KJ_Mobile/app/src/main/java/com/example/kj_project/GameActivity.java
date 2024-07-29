@@ -23,15 +23,13 @@ public class GameActivity extends Activity {
 
     String[] textEng, textKor, fileNames;
 
-    private List<String> Random;
-    private int state = 0;
-    private int temp = -1;
-    private int selectedEngIndex = -1;
-    private int selectedKorIndex = -1;
-    private CountDownTimer timer;
-    private boolean gameSolved = false;
-
-    int fin = 0;
+    List<String> Random;
+    int state = 0;
+    int temp = -1;
+    int selectedEngIndex = -1;
+    int selectedKorIndex = -1;
+    CountDownTimer timer;
+    boolean gameSolved = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +81,7 @@ public class GameActivity extends Activity {
 
         Collections.shuffle(Random);
 
-        for (int i = 0; i < 10 && i < Random.size(); i++) {
+        for (int i = 0; i < 10 ; i++) {
             word[i].setText(Random.get(i));
         }
 
@@ -125,7 +123,6 @@ public class GameActivity extends Activity {
                             word[index].setVisibility(View.INVISIBLE);
                             checkGameSolved();
                         }
-                        else word[temp].setBackgroundColor(Color.parseColor("#FFFFFF"));
 
                         state = 0;
                         temp = -1;
